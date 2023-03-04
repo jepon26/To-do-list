@@ -15,6 +15,49 @@ return b.createdAt - a.createdAt
 }))
 
 
+watch(name, (newVal) => {
+	localStorage.setItem('name', newVal)
+})
+
+watch(todos, (newVal) => {
+  localStorage.setItem('todos', JSON.stringify(newVal))
+}, {
+  deep: true
+})
+
+
+
+const addTodo = () => {
+  if(input_content.value.trim() === '' || input_category.value === nul) {
+    return
+  }
+
+
+
+todos.value.push( {
+  content: input_category.value,
+  category: input_category.value,
+  done: false,
+  editable: false,
+  createdAt: new Date().getTime()
+
+})
+
+}
+
+
+
+const removeTodo = (todo) => {
+  todos.value = todos.value.filter((t) => t !== todo)
+}
+
+
+
+onMounted(()=> {
+  name.value =localStorage.getItem('name') || '' 
+  todos.value = JSON.parse(localStorage.getItem('todos') || [])
+})
+
 
 
 
