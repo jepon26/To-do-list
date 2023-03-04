@@ -1,47 +1,39 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref, onMounted, computed, watch} from 'vue'
+
+const todos = ref([])
+const name = ref('')
+
+
+
+const input_content = ref('')
+const input_category = ref(null)
+
+
+const todos_asc = computed(() => todos.value.sort((a, b) => {
+return b.createdAt - a.createdAt
+}))
+
+
+
+
+
+
+
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <main class="app">
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+<section class="one">
+  <h1 class="title">
+Hello, <input type="text" placeholder="Insert Name" v-model="name">
+  </h1>
 
-  <main>
-    <TheWelcome />
+</section>
+
   </main>
+
+
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
